@@ -1,0 +1,92 @@
+[
+  {
+    "model": "opportunities.opportunity",
+    "pk": 1,
+    "fields": {
+      "title": "Software Engineering Intern",
+      "organization": "Northstar Labs",
+      "opportunity_type": "internship",
+      "description": "Join a small product engineering team for a 12-week summer internship. You will ship customer-facing features, pair with a mentor, and take part in weekly design reviews. Applicants should be comfortable learning in a collaborative codebase.",
+      "required_skills": "Python, Git, SQL, curiosity",
+      "location": "Boston, MA",
+      "is_remote": false,
+      "deadline": "2026-10-30",
+      "application_url": "https://example.com/careers/software-engineering-intern",
+      "logo_url": "",
+      "is_active": true,
+      "created_at": "2026-10-16T09:00:00Z"
+    }
+  },
+  {
+    "model": "opportunities.opportunity",
+    "pk": 2,
+    "fields": {
+      "title": "Climate Code Sprint",
+      "organization": "Open Earth Collective",
+      "opportunity_type": "hackathon",
+      "description": "A two-day team hackathon focused on practical climate data tools. Build a prototype using open datasets, get feedback from domain mentors, and present your work to a panel of engineers and researchers. Beginners are welcome.",
+      "required_skills": "JavaScript, Python, data visualization, teamwork",
+      "location": "Remote",
+      "is_remote": true,
+      "deadline": "2026-10-27",
+      "application_url": "https://example.com/events/climate-code-sprint",
+      "logo_url": "",
+      "is_active": true,
+      "created_at": "2026-10-16T09:05:00Z"
+    }
+  },
+  {
+    "model": "opportunities.opportunity",
+    "pk": 3,
+    "fields": {
+      "title": "Designing Accessible Interfaces",
+      "organization": "Civic Tech Studio",
+      "opportunity_type": "workshop",
+      "description": "A hands-on workshop covering accessible interaction patterns, keyboard navigation, semantic HTML, and practical screen-reader testing. Leave with a small audited interface and a repeatable checklist for future projects.",
+      "required_skills": "HTML, CSS, accessibility basics",
+      "location": "Chicago, IL",
+      "is_remote": false,
+      "deadline": "2026-11-04",
+      "application_url": "https://example.com/workshops/accessible-interfaces",
+      "logo_url": "",
+      "is_active": true,
+      "created_at": "2026-10-16T09:10:00Z"
+    }
+  },
+  {
+    "model": "opportunities.opportunity",
+    "pk": 4,
+    "fields": {
+      "title": "Student Developer Open House",
+      "organization": "Harbor Robotics",
+      "opportunity_type": "event",
+      "description": "Meet engineers working across software, autonomy, and embedded systems. The evening includes short project talks, informal portfolio conversations, and time to learn about upcoming student roles.",
+      "required_skills": "Software projects, communication, curiosity",
+      "location": "Seattle, WA",
+      "is_remote": false,
+      "deadline": "2026-11-08",
+      "application_url": "https://example.com/events/student-developer-open-house",
+      "logo_url": "",
+      "is_active": true,
+      "created_at": "2026-10-16T09:15:00Z"
+    }
+  },
+  {
+    "model": "opportunities.opportunity",
+    "pk": 5,
+    "fields": {
+      "title": "Data Platform Co-op",
+      "organization": "Fieldnote Analytics",
+      "opportunity_type": "internship",
+      "description": "Support a data infrastructure team building reliable pipelines for research and product analytics. The six-month co-op pairs scoped delivery work with code review, documentation, and regular mentorship.",
+      "required_skills": "SQL, Python, data modeling, communication",
+      "location": "Hybrid · Toronto, ON",
+      "is_remote": false,
+      "deadline": "2026-11-14",
+      "application_url": "https://example.com/careers/data-platform-coop",
+      "logo_url": "",
+      "is_active": true,
+      "created_at": "2026-10-16T09:20:00Z"
+    }
+  }
+]

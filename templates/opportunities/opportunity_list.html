@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Find opportunities{% endblock %}
+{% block content %}
+<section class="explore-hero"><div class="container-xl hero-inner"><div class="hero-copy"><p class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT CHAPTER STARTS HERE</p><h1>Find work that<br><em>moves you forward.</em></h1><p class="hero-lede">Internships, hackathons and rooms full of people building what’s next.</p></div><div class="hero-aside"><div class="aside-index">01 <span>—</span> DISCOVER</div><p>Curated opportunities for curious minds and ambitious makers.</p><a href="#opportunity-results" class="text-arrow">Browse the board <span>↓</span></a></div></div></section>
+<section class="board-section" id="opportunity-results"><div class="container-xl">
+  <div class="section-heading"><div><p class="eyebrow muted">THE OPPORTUNITY BOARD</p><h2>Open doors <span class="count-mark">{{ page.paginator.count|stringformat:'02d' }}</span></h2></div><p class="section-note">The right next step is closer than you think.</p></div>
+  <form method="get" class="filter-bar">
+    <div class="search-field"><span aria-hidden="true">⌕</span><input type="search" name="q" value="{{ search }}" placeholder="Search title, company or skill" aria-label="Search opportunities"></div>
+    <select name="type" aria-label="Filter by type"><option value="">All types</option>{% for value,label in types %}<option value="{{ value }}" {% if selected_type == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select>
+    <select name="location" aria-label="Filter by work setting"><option value="">Any setting</option><option value="remote" {% if selected_location == 'remote' %}selected{% endif %}>Remote</option><option value="onsite" {% if selected_location == 'onsite' %}selected{% endif %}>On-site / hybrid</option></select>
+    <input type="search" name="place" value="{{ location_query }}" placeholder="City or region" aria-label="Filter by city or region">
+    <select name="sort" aria-label="Sort opportunities"><option value="newest" {% if sort == 'newest' %}selected{% endif %}>Newest first</option><option value="deadline" {% if sort == 'deadline' %}selected{% endif %}>Nearest deadline</option></select>
+    <button class="btn btn-filter" type="submit">Apply filters <span>↗</span></button>
+  </form>
+  {% if opportunities %}<div class="opportunity-grid">{% for opportunity in opportunities %}
+    <article class="opportunity-card" style="--card-index: {{ forloop.counter0 }}">
+      <div class="card-top"><span class="type-label type-{{ opportunity.opportunity_type }}">{{ opportunity.get_opportunity_type_display }}</span>{% if opportunity.deadline %}<span class="deadline-label {% if opportunity.is_expired %}expired{% endif %}">{% if opportunity.is_expired %}Closed{% else %}Due {{ opportunity.deadline|date:'M j' }}{% endif %}</span>{% endif %}</div>
+      <div class="company-row"><span class="company-monogram">{{ opportunity.organization|first|upper }}</span><span>{{ opportunity.organization }}</span></div>
+      <h3><a href="{% url 'opportunity_detail' opportunity.pk %}">{{ opportunity.title }}</a></h3>
+      <p class="card-description">{{ opportunity.description|truncatewords:22 }}</p>
+      <div class="skill-tags">{% if opportunity.required_skills %}<span>{{ opportunity.required_skills|truncatechars:48 }}</span>{% else %}<span>Open to all skills</span>{% endif %}</div>
+      <div class="card-bottom"><span class="location-label">{% if opportunity.is_remote %}◎ Remote{% else %}⌖ {{ opportunity.location|default:'Location flexible' }}{% endif %}</span>
+        <div class="card-actions"><a href="{% url 'opportunity_detail' opportunity.pk %}" class="circle-link" aria-label="View {{ opportunity.title }}">↗</a>{% if user.is_authenticated %}<form method="post" action="{% url 'toggle_saved' opportunity.pk %}">{% csrf_token %}<input type="hidden" name="next" value="opportunity_list"><button class="save-button {% if opportunity.pk in saved_ids %}is-saved{% endif %}" type="submit" aria-label="{% if opportunity.pk in saved_ids %}Unsave{% else %}Save{% endif %} {{ opportunity.title }}">{% if opportunity.pk in saved_ids %}♥{% else %}♡{% endif %}</button></form>{% endif %}</div>
+      </div>
+    </article>
+  {% endfor %}</div>{% else %}<div class="empty-state"><div class="empty-icon">⌕</div><h3>No matches this time.</h3><p>Try a different keyword or loosen your filters.</p><a class="text-arrow" href="{% url 'opportunity_list' %}">Clear filters <span>↗</span></a></div>{% endif %}
+  {% if page.paginator.num_pages > 1 %}<nav class="pagination-row" aria-label="Opportunity pages"><span>Page {{ page.number }} of {{ page.paginator.num_pages }}</span><div>{% if page.has_previous %}<a href="?q={{ search|urlencode }}&type={{ selected_type }}&location={{ selected_location|urlencode }}&place={{ location_query|urlencode }}&sort={{ sort }}&page={{ page.previous_page_number }}">← Newer</a>{% endif %}{% if page.has_next %}<a href="?q={{ search|urlencode }}&type={{ selected_type }}&location={{ selected_location|urlencode }}&place={{ location_query|urlencode }}&sort={{ sort }}&page={{ page.next_page_number }}">Older →</a>{% endif %}</div></nav>{% endif %}
+</div></section>
+{% endblock %}
